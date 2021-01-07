@@ -100,6 +100,10 @@ public class PlayerController : MonoBehaviour
     {
         SetScoreText();
         SetHealthText();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("menu");
+        }
         if (isDead)
         {
             CharacterController cc = GetComponent<CharacterController>();
