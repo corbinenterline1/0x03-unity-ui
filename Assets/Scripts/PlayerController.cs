@@ -95,12 +95,15 @@ public class PlayerController : MonoBehaviour
             WinLoseBG.SetActive(true);
             WinLoseBG.GetComponent<Image>().color = Color.green;
             WinLoseText.color = Color.black;
-            WinLoseText.text = "You Win!";
             goalSource.Play();
             if (!farted)
             {
                 fartlessSource.Play();
-                Fartless.SetActive(true);
+                WinLoseText.text = "Fartless Victory!";
+            }
+            else
+            {
+                WinLoseText.text = "You Win!";
             }
             StartCoroutine(LoadScene(3));
         }
