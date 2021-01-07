@@ -17,9 +17,15 @@ public class PlayerController : MonoBehaviour
     public Text WinLoseText;
 
     public GameObject WinLoseBG;
+
+    public GameObject FartAlert;
     private int score = 0;
 
     private bool isDead;
+
+    private bool farted;
+
+    public GameObject Fartless;
 
     /// <summary>
     /// Player health.
@@ -31,6 +37,8 @@ public class PlayerController : MonoBehaviour
     AudioSource goalSource;
     AudioSource deathSource;
     AudioSource noSource;
+
+    AudioSource fartlessSource;
 
     /// <summary>
     /// Drag for player
@@ -51,12 +59,15 @@ public class PlayerController : MonoBehaviour
         coinSource = allMyAudioSources[2];
         goalSource = allMyAudioSources[3];
         deathSource = allMyAudioSources[4];
+        fartlessSource = allMyAudioSources[5];
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Walls")
         {
+            FartAlert.SetActive(true);
+            farted = true;
             wallSource.Play();
         }
     }
@@ -86,6 +97,11 @@ public class PlayerController : MonoBehaviour
             WinLoseText.color = Color.black;
             WinLoseText.text = "You Win!";
             goalSource.Play();
+            if (!farted)
+            {
+                fartlessSource.Play();
+                Fartless.SetActive(true);
+            }
             StartCoroutine(LoadScene(3));
         }
     }
