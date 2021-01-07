@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 20;
 
     public Text ScoreText;
+
+    public Text healthText;
     private int score = 0;
 
     private bool isDead;
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour
         else if (other.tag == "Trap")
         {
             health--;
-            Debug.Log(string.Format("Health: {0}", health));
+            // Debug.Log(string.Format("Health: {0}", health));
             if (health > 0)
             {
                 trapSource.Play();
@@ -88,6 +90,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         SetScoreText();
+        SetHealthText();
         if (isDead)
         {
             CharacterController cc = GetComponent<CharacterController>();
@@ -123,5 +126,9 @@ public class PlayerController : MonoBehaviour
     void SetScoreText()
     {
         ScoreText.text = "Score: " + score;
+    }
+    void SetHealthText()
+    {
+        healthText.text = "Health: " + health;
     }
 }
