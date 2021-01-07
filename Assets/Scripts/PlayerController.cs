@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     /// <summary>
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public float speed = 20;
 
+    public Text ScoreText;
     private int score = 0;
 
     private bool isDead;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Pickup")
         {
             score++;
-            Debug.Log(string.Format("Score: {0}", score));
+            // Debug.Log(string.Format("Score: {0}", score));
             Destroy(other.gameObject);
             coinSource.Play();
         }
@@ -85,6 +87,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetScoreText();
         if (isDead)
         {
             CharacterController cc = GetComponent<CharacterController>();
@@ -116,5 +119,9 @@ public class PlayerController : MonoBehaviour
             health = 5;
             score = 0;
         }
+    }
+    void SetScoreText()
+    {
+        ScoreText.text = "Score: " + score;
     }
 }
