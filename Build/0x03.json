@@ -1,6 +1,6 @@
 {
 "companyName": "DefaultCompany",
-"productName": "0x02-unity-scripting",
+"productName": "0x03-unity-ui",
 "productVersion": "1.0",
 "dataUrl": "0x03.data.unityweb",
 "wasmCodeUrl": "0x03.wasm.code.unityweb",
