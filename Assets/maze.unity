@@ -5773,6 +5773,8 @@ MonoBehaviour:
   speed: 27
   ScoreText: {fileID: 662882850}
   healthText: {fileID: 487511601}
+  WinLoseText: {fileID: 511661070}
+  WinLoseBG: {fileID: 532450181}
   health: 5
   dragFactor: 0.98
 --- !u!82 &1532535135

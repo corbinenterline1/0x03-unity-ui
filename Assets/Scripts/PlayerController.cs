@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public Text ScoreText;
 
     public Text healthText;
+
+    public Text WinLoseText;
+
+    public GameObject WinLoseBG;
     private int score = 0;
 
     private bool isDead;
@@ -76,14 +80,19 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.tag == "Goal")
         {
-            Debug.Log(string.Format("You win!"));
+            // Debug.Log(string.Format("You win!"));
+            WinLoseBG.SetActive(true);
+            WinLoseBG.GetComponent<Image>().color = Color.green;
+            WinLoseText.color = Color.black;
+            WinLoseText.text = "You Win!";
             goalSource.Play();
+            StartCoroutine(LoadScene(3));
         }
     }
 
-    private IEnumerator WaitForSceneLoad()
+    private IEnumerator LoadScene(float seconds)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     // Update is called once per frame
@@ -113,14 +122,16 @@ public class PlayerController : MonoBehaviour
         }
         if (health <= 0)
         {
-            Debug.Log(string.Format("Game Over!"));
+            // Debug.Log(string.Format("Game Over!"));
             isDead = true;
             deathSource.Play();
+            WinLoseBG.SetActive(true);
+            WinLoseBG.GetComponent<Image>().color = Color.red;
+            WinLoseText.color = Color.white;
+            WinLoseText.text = "Game Over!";
             GameObject objectToDisappear = GameObject.Find("Player");
             objectToDisappear.GetComponent<Renderer>().enabled = false;
-            StartCoroutine(WaitForSceneLoad());
-            health = 5;
-            score = 0;
+            StartCoroutine(LoadScene(3));
         }
     }
     void SetScoreText()
